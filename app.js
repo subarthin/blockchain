@@ -1,9 +1,8 @@
+//import { contractAbi } from "./contractABI.js";
+const myMod = require('./contractABI.js');
 const express = require('express');
-const app = express();
-const port = 8000;
-
+var Tx = require('ethereumjs-tx');
 const Web3 = require('web3');
-
 
 const contractAbi = [
     {
@@ -507,43 +506,62 @@ const contractAbi = [
     }
 ];
 
-const contractAddress = "0x4690Ce09430c6D98bA0BB975c06a4A4C89196c8c";
-const companyAddress = "0x68e4017052A5709E3782703a538eB364F726F1D3";
-const accountAddress = "0xCC2808a9c407A562f954a6646472835B06f042df";
 
+const app = express();
+const port = 8000;
 
 app.listen(port, () => {
     console.log('listen port 8000');
 })
 
-const web3 = new Web3("http://127.0.0.1:7545");
+const contractAddress = "0xfb3b6D7B30149cFAE0CdeDF1A5e1D1DE1C3048b0";
+const companyAddress = "0x55E428bfE81f3bF994CE1E3E5f09df49FA38ECee";
 
-var myContract = new web3.eth.Contract(contractAbi, contractAddress, {
-    from: accountAddress,
-});
+const privateKey1 = Buffer.from('.....', 'hex');
 
-app.get('/one', async (req, res) => {
-    // var myContract = new web3.eth.Contract(contractAbi, contractAddress, {
-    //     from: accountAddress,
-    // });
-    const create = await myContract.methods.selectPlan("0x1aaA0600e8Be6196f933FD21085bfE6Aa935345d", 123, 285412347658758).call({
-        from: companyAddress
-    });
-    console.log(create);
-    res.send(create);
+const web3 = new Web3("https://rinkeby.infura.io/v3/6d17d1d302fd468a9ccc16233e5ff1b8");
+
+web3.eth.defaultAccount = companyAddress;
+
+var myContract = new web3.eth.Contract(contractAbi, contractAddress);
+
+
+app.get('/create_account', async (req, res) => {
+    const query = await myContract.methods.createAccount("0x1aaA0600e8Be6196f933FD21085bfE6Aa935345d").encodeABI();
+
+    web3.eth.getTransactionCount(companyAddress, (err, txCount) => {
+        // Build the transaction
+        const txObject = {
+            nonce: web3.utils.toHex(txCount),
+            to: contractAddress,
+            value: web3.utils.toHex(web3.utils.toWei('0', 'ether')),
+            gasLimit: web3.utils.toHex(2100000),
+            gasPrice: web3.utils.toHex(web3.utils.toWei('6', 'gwei')),
+            data: query
+        }
+        // Sign the transaction
+        const tx = new Tx(txObject);
+        tx.sign(privateKey1);
+
+        const serializedTx = tx.serialize();
+        const raw = '0x' + serializedTx.toString('hex');
+
+        // Broadcast the transaction
+        const transaction = web3.eth.sendSignedTransaction(raw, (err, tx) => {
+            console.log(tx)
+        });
+
+        res.send(tx);
+    })
 })
 
-app.get('/two', async (req, res) => {
-    // var myContract = new web3.eth.Contract(contractAbi, contractAddress, {
-    //     from: accountAddress,
-    // });
+app.get('/check_created_account', async (req, res) => {
     var isPresent = false;
-    isPresent = await myContract.methods.checkIfPlanExpired("0x1aaA0600e8Be6196f933FD21085bfE6Aa935345d").call({
+    isPresent = await myContract.methods.checkIfAccountPresent("0x1aaA0600e8Be6196f933FD21085bfE6Aa935345d").call({
         from: companyAddress,
     });
     console.log(isPresent);
     res.send(isPresent);
-
 })
 
 
