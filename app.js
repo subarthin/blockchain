@@ -510,7 +510,7 @@ const contractAbi = [
 const app = express();
 const port = 8000;
 
-app.listen(process.env.PORT || 8000, () => {
+app.listen(process.env.port || 8000, function () {
     console.log('listen port 8000');
 })
 
