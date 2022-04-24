@@ -47,8 +47,7 @@ const contractAbi = [
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [],
@@ -61,8 +60,7 @@ const contractAbi = [
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -81,8 +79,7 @@ const contractAbi = [
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -106,8 +103,7 @@ const contractAbi = [
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -131,8 +127,7 @@ const contractAbi = [
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -170,7 +165,7 @@ const contractAbi = [
                 "type": "uint256"
             }
         ],
-        "name": "getNoProduct",
+        "name": "getNoProductOwner",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -179,8 +174,7 @@ const contractAbi = [
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -195,7 +189,7 @@ const contractAbi = [
                 "type": "uint256"
             }
         ],
-        "name": "getProductGeneralDetails1",
+        "name": "getProductGeneralDetailsOwner",
         "outputs": [
             {
                 "components": [
@@ -216,8 +210,7 @@ const contractAbi = [
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -237,7 +230,7 @@ const contractAbi = [
                 "type": "uint256"
             }
         ],
-        "name": "getProductStatusDetails",
+        "name": "getProductStatusDetailsOwner",
         "outputs": [
             {
                 "components": [
@@ -268,8 +261,7 @@ const contractAbi = [
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -289,7 +281,7 @@ const contractAbi = [
                 "type": "string"
             }
         ],
-        "name": "addProduct",
+        "name": "addProductOwner",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -330,7 +322,7 @@ const contractAbi = [
                 "type": "uint256"
             }
         ],
-        "name": "getNoProduct2",
+        "name": "getNoProductSupplier",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -339,8 +331,7 @@ const contractAbi = [
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -355,7 +346,7 @@ const contractAbi = [
                 "type": "uint256"
             }
         ],
-        "name": "getProductGeneralDetails2",
+        "name": "getProductGeneralDetailsSupplier",
         "outputs": [
             {
                 "components": [
@@ -376,8 +367,7 @@ const contractAbi = [
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -402,7 +392,7 @@ const contractAbi = [
                 "type": "uint256"
             }
         ],
-        "name": "addProductStaus",
+        "name": "addProductStausSupplier",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -424,8 +414,7 @@ const contractAbi = [
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -457,8 +446,7 @@ const contractAbi = [
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -481,8 +469,7 @@ const contractAbi = [
         "name": "selectPlan",
         "outputs": [],
         "stateMutability": "payable",
-        "type": "function",
-        "payable": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -501,8 +488,7 @@ const contractAbi = [
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     }
 ];
 
@@ -510,14 +496,14 @@ const contractAbi = [
 const app = express();
 const port = 8000;
 
-app.listen(process.env.port || 8000, function () {
+app.listen(port, () => {
     console.log('listen port 8000');
 })
 
-const contractAddress = "0xfb3b6D7B30149cFAE0CdeDF1A5e1D1DE1C3048b0";
+const contractAddress = "0x860Ce059120F2AecfE69331067Fe231c3DDd32EB";
 const companyAddress = "0x55E428bfE81f3bF994CE1E3E5f09df49FA38ECee";
 
-const privateKey1 = Buffer.from('295d52683df9a4d36edadef7428b81278ee6aa821128c4fec95b8409c1af5160', 'hex');
+const privateKey = Buffer.from('', 'hex');
 
 const web3 = new Web3("https://rinkeby.infura.io/v3/6d17d1d302fd468a9ccc16233e5ff1b8");
 
@@ -525,9 +511,22 @@ web3.eth.defaultAccount = companyAddress;
 
 var myContract = new web3.eth.Contract(contractAbi, contractAddress);
 
+// The company 
 
+// C-1 
+app.get('/check_created_account', async function (req, res) {
+    const address = req.query.accountaddress;
+    var value = await myContract.methods.checkIfAccountPresent(address).call({
+        from: companyAddress,
+    });
+    res.send({ 'isAccountPresent': value });
+})
+
+
+// C-2
 app.get('/create_account', async (req, res) => {
-    const query = await myContract.methods.createAccount("0x1aaA0600e8Be6196f933FD21085bfE6Aa935345d").encodeABI();
+    const address = req.query.accountaddress;
+    const query = await myContract.methods.createAccount(address).encodeABI();
 
     web3.eth.getTransactionCount(companyAddress, (err, txCount) => {
         // Build the transaction
@@ -541,7 +540,7 @@ app.get('/create_account', async (req, res) => {
         }
         // Sign the transaction
         const tx = new Tx(txObject);
-        tx.sign(privateKey1);
+        tx.sign(privateKey);
 
         const serializedTx = tx.serialize();
         const raw = '0x' + serializedTx.toString('hex');
@@ -555,13 +554,244 @@ app.get('/create_account', async (req, res) => {
     })
 })
 
-app.get('/check_created_account', async (req, res) => {
-    var isPresent = false;
-    isPresent = await myContract.methods.checkIfAccountPresent("0x1aaA0600e8Be6196f933FD21085bfE6Aa935345d").call({
+
+// C-3
+app.get('/check_payment_done', async function (req, res) {
+    const address = req.query.accountaddress;
+    var value = await myContract.methods.checkIfPaymentDone(address).call({
         from: companyAddress,
     });
-    console.log(isPresent);
-    res.send(isPresent);
+    res.send({ 'isPaymentDone': value });
+})
+
+// C-4
+app.get('/select_plan', async (req, res) => {
+    const address = req.query.accountaddress;
+    const amount = req.query.amountpaid;
+    const expiresAt = req.query.planexpiresat;
+    const query = await myContract.methods.selectPlan(address, amount, expiresAt).encodeABI();
+
+    web3.eth.getTransactionCount(companyAddress, (err, txCount) => {
+        // Build the transaction
+        const txObject = {
+            nonce: web3.utils.toHex(txCount),
+            to: contractAddress,
+            value: web3.utils.toHex(web3.utils.toWei('0', 'ether')),
+            gasLimit: web3.utils.toHex(2100000),
+            gasPrice: web3.utils.toHex(web3.utils.toWei('6', 'gwei')),
+            data: query
+        }
+        // Sign the transaction
+        const tx = new Tx(txObject);
+        tx.sign(privateKey);
+
+        const serializedTx = tx.serialize();
+        const raw = '0x' + serializedTx.toString('hex');
+
+        // Broadcast the transaction
+        const transaction = web3.eth.sendSignedTransaction(raw, (err, tx) => {
+            console.log(tx)
+        });
+
+        res.send(tx);
+    })
 })
 
 
+// C-5
+app.get('/check_plan_expired', async function (req, res) {
+    const address = req.query.accountaddress;
+    var value = await myContract.methods.checkIfPlanExpired(address).call({
+        from: companyAddress,
+    });
+    res.send({ 'isplanExpired': value });
+})
+
+
+// The Owner
+
+// OA-1
+app.get('/add_owner', async (req, res) => {
+    const address = req.query.accountaddress;
+    const ownerName = req.query.name;
+    const ownerId = req.query.ownerId;
+    const query = await myContract.methods.addOwner(address, ownerName, ownerId).encodeABI();
+
+    web3.eth.getTransactionCount(companyAddress, (err, txCount) => {
+        // Build the transaction
+        const txObject = {
+            nonce: web3.utils.toHex(txCount),
+            to: contractAddress,
+            value: web3.utils.toHex(web3.utils.toWei('0', 'ether')),
+            gasLimit: web3.utils.toHex(2100000),
+            gasPrice: web3.utils.toHex(web3.utils.toWei('6', 'gwei')),
+            data: query
+        }
+        // Sign the transaction
+        const tx = new Tx(txObject);
+        tx.sign(privateKey);
+
+        const serializedTx = tx.serialize();
+        const raw = '0x' + serializedTx.toString('hex');
+
+        // Broadcast the transaction
+        const transaction = web3.eth.sendSignedTransaction(raw, (err, tx) => {
+            console.log(tx)
+        });
+
+        res.send(tx);
+    })
+})
+
+// OA-2
+app.get('/get_no_product_owner', async function (req, res) {
+    const address = req.query.accountaddress;
+    const ownerId = req.query.ownerId;
+    var value = await myContract.methods.getNoProductOwner(address, ownerId).call({
+        from: companyAddress,
+    });
+    res.send({ 'noOfProducts': value });
+})
+
+// OA-3
+app.get('/get_product_general_details_owner', async function (req, res) {
+    const address = req.query.accountaddress;
+    const ownerId = req.query.ownerId;
+    var value = await myContract.methods.getProductGeneralDetailsOwner(address, ownerId).call({
+        from: companyAddress,
+    });
+    res.send({ 'productDetails': value });
+})
+
+// OA-4
+app.get('/get_product_status_details_owner', async function (req, res) {
+    const address = req.query.accountaddress;
+    const ownerId = req.query.ownerId;
+    const productId = req.query.productId;
+    var value = await myContract.methods.getProductStatusDetailsOwner(address, ownerId, productId).call({
+        from: companyAddress,
+    });
+    res.send({ 'productStatus': value });
+})
+
+// OA-5
+app.get('/add_product_owner', async (req, res) => {
+    const address = req.query.accountaddress;
+    const ownerId = req.query.ownerId;
+    const productName = req.query.name;
+    const query = await myContract.methods.addProductOwner(address, ownerId, productName).encodeABI();
+
+    web3.eth.getTransactionCount(companyAddress, (err, txCount) => {
+        // Build the transaction
+        const txObject = {
+            nonce: web3.utils.toHex(txCount),
+            to: contractAddress,
+            value: web3.utils.toHex(web3.utils.toWei('0', 'ether')),
+            gasLimit: web3.utils.toHex(2100000),
+            gasPrice: web3.utils.toHex(web3.utils.toWei('6', 'gwei')),
+            data: query
+        }
+        // Sign the transaction
+        const tx = new Tx(txObject);
+        tx.sign(privateKey);
+
+        const serializedTx = tx.serialize();
+        const raw = '0x' + serializedTx.toString('hex');
+
+        // Broadcast the transaction
+        const transaction = web3.eth.sendSignedTransaction(raw, (err, tx) => {
+            console.log(tx)
+        });
+
+        res.send(tx);
+    })
+})
+
+// The Supplier
+
+// SP-1
+app.get('/add_supplier', async (req, res) => {
+    const address = req.query.accountaddress;
+    const supplierName = req.query.name;
+    const supplierId = req.query.supplierId;
+    const query = await myContract.methods.addSupplier(address, supplierName, supplierId).encodeABI();
+
+    web3.eth.getTransactionCount(companyAddress, (err, txCount) => {
+        // Build the transaction
+        const txObject = {
+            nonce: web3.utils.toHex(txCount),
+            to: contractAddress,
+            value: web3.utils.toHex(web3.utils.toWei('0', 'ether')),
+            gasLimit: web3.utils.toHex(2100000),
+            gasPrice: web3.utils.toHex(web3.utils.toWei('6', 'gwei')),
+            data: query
+        }
+        // Sign the transaction
+        const tx = new Tx(txObject);
+        tx.sign(privateKey);
+
+        const serializedTx = tx.serialize();
+        const raw = '0x' + serializedTx.toString('hex');
+
+        // Broadcast the transaction
+        const transaction = web3.eth.sendSignedTransaction(raw, (err, tx) => {
+            console.log(tx)
+        });
+
+        res.send(tx);
+    })
+})
+
+// SP-2
+app.get('/get_no_product_supplier', async function (req, res) {
+    const address = req.query.accountaddress;
+    const supplierId = req.query.supplierId;
+    var value = await myContract.methods.getNoProductSupplier(address, supplierId).call({
+        from: companyAddress,
+    });
+    res.send({ 'noOfProducts': value });
+})
+
+// SP-3
+app.get('/get_product_general_details_supplier', async function (req, res) {
+    const address = req.query.accountaddress;
+    const supplierId = req.query.supplierId;
+    var value = await myContract.methods.getProductGeneralDetailsSupplier(address, supplierId).call({
+        from: companyAddress,
+    });
+    res.send({ 'productDetails': value });
+})
+
+// SP-4
+app.get('/add_product_staus_supplier', async (req, res) => {
+    const address = req.query.accountaddress;
+    const supplierId = req.query.supplierId;
+    const message = req.query.message;
+    const productId = req.query.productId;
+    const query = await myContract.methods.addProductStausSupplier(address, supplierId, message, productId).encodeABI();
+
+    web3.eth.getTransactionCount(companyAddress, (err, txCount) => {
+        // Build the transaction
+        const txObject = {
+            nonce: web3.utils.toHex(txCount),
+            to: contractAddress,
+            value: web3.utils.toHex(web3.utils.toWei('0', 'ether')),
+            gasLimit: web3.utils.toHex(2100000),
+            gasPrice: web3.utils.toHex(web3.utils.toWei('6', 'gwei')),
+            data: query
+        }
+        // Sign the transaction
+        const tx = new Tx(txObject);
+        tx.sign(privateKey);
+
+        const serializedTx = tx.serialize();
+        const raw = '0x' + serializedTx.toString('hex');
+
+        // Broadcast the transaction
+        const transaction = web3.eth.sendSignedTransaction(raw, (err, tx) => {
+            console.log(tx)
+        });
+
+        res.send(tx);
+    })
+})
