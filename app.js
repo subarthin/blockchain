@@ -510,14 +510,14 @@ const contractAbi = [
 const app = express();
 const port = 8000;
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 8000, () => {
     console.log('listen port 8000');
 })
 
 const contractAddress = "0xfb3b6D7B30149cFAE0CdeDF1A5e1D1DE1C3048b0";
 const companyAddress = "0x55E428bfE81f3bF994CE1E3E5f09df49FA38ECee";
 
-const privateKey1 = Buffer.from('.....', 'hex');
+const privateKey1 = Buffer.from('295d52683df9a4d36edadef7428b81278ee6aa821128c4fec95b8409c1af5160', 'hex');
 
 const web3 = new Web3("https://rinkeby.infura.io/v3/6d17d1d302fd468a9ccc16233e5ff1b8");
 
