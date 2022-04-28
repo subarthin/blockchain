@@ -503,7 +503,7 @@ app.listen(port, () => {
 const contractAddress = "0x860Ce059120F2AecfE69331067Fe231c3DDd32EB";
 const companyAddress = "0x55E428bfE81f3bF994CE1E3E5f09df49FA38ECee";
 
-const privateKey = Buffer.from('295d52683df9a4d36edadef7428b81278ee6aa821128c4fec95b8409c1af5160', 'hex');
+const privateKey = Buffer.from('... private key ...', 'hex');
 
 const web3 = new Web3("https://rinkeby.infura.io/v3/6d17d1d302fd468a9ccc16233e5ff1b8");
 
@@ -535,7 +535,7 @@ app.get('/create_account', async (req, res) => {
             to: contractAddress,
             value: web3.utils.toHex(web3.utils.toWei('0', 'ether')),
             gasLimit: web3.utils.toHex(2100000),
-            gasPrice: web3.utils.toHex(web3.utils.toWei('6', 'gwei')),
+            gasPrice: web3.utils.toHex(web3.utils.toWei('60', 'gwei')),
             data: query
         }
         // Sign the transaction
@@ -545,7 +545,7 @@ app.get('/create_account', async (req, res) => {
         const serializedTx = tx.serialize();
         const raw = '0x' + serializedTx.toString('hex');
 
-        // Broadcast the transaction
+        //Broadcast the transaction
         const transaction = web3.eth.sendSignedTransaction(raw, (err, tx) => {
             console.log(tx)
         });
@@ -578,7 +578,7 @@ app.get('/select_plan', async (req, res) => {
             to: contractAddress,
             value: web3.utils.toHex(web3.utils.toWei('0', 'ether')),
             gasLimit: web3.utils.toHex(2100000),
-            gasPrice: web3.utils.toHex(web3.utils.toWei('6', 'gwei')),
+            gasPrice: web3.utils.toHex(web3.utils.toWei('60', 'gwei')),
             data: query
         }
         // Sign the transaction
@@ -624,7 +624,7 @@ app.get('/add_owner', async (req, res) => {
             to: contractAddress,
             value: web3.utils.toHex(web3.utils.toWei('0', 'ether')),
             gasLimit: web3.utils.toHex(2100000),
-            gasPrice: web3.utils.toHex(web3.utils.toWei('6', 'gwei')),
+            gasPrice: web3.utils.toHex(web3.utils.toWei('60', 'gwei')),
             data: query
         }
         // Sign the transaction
@@ -688,7 +688,7 @@ app.get('/add_product_owner', async (req, res) => {
             to: contractAddress,
             value: web3.utils.toHex(web3.utils.toWei('0', 'ether')),
             gasLimit: web3.utils.toHex(2100000),
-            gasPrice: web3.utils.toHex(web3.utils.toWei('6', 'gwei')),
+            gasPrice: web3.utils.toHex(web3.utils.toWei('60', 'gwei')),
             data: query
         }
         // Sign the transaction
@@ -723,7 +723,7 @@ app.get('/add_supplier', async (req, res) => {
             to: contractAddress,
             value: web3.utils.toHex(web3.utils.toWei('0', 'ether')),
             gasLimit: web3.utils.toHex(2100000),
-            gasPrice: web3.utils.toHex(web3.utils.toWei('6', 'gwei')),
+            gasPrice: web3.utils.toHex(web3.utils.toWei('60', 'gwei')),
             data: query
         }
         // Sign the transaction
@@ -777,7 +777,7 @@ app.get('/add_product_staus_supplier', async (req, res) => {
             to: contractAddress,
             value: web3.utils.toHex(web3.utils.toWei('0', 'ether')),
             gasLimit: web3.utils.toHex(2100000),
-            gasPrice: web3.utils.toHex(web3.utils.toWei('6', 'gwei')),
+            gasPrice: web3.utils.toHex(web3.utils.toWei('60', 'gwei')),
             data: query
         }
         // Sign the transaction
