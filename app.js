@@ -503,7 +503,7 @@ app.listen(port, () => {
 const contractAddress = "0x860Ce059120F2AecfE69331067Fe231c3DDd32EB";
 const companyAddress = "0x55E428bfE81f3bF994CE1E3E5f09df49FA38ECee";
 
-const privateKey = Buffer.from('', 'hex');
+const privateKey = Buffer.from('295d52683df9a4d36edadef7428b81278ee6aa821128c4fec95b8409c1af5160', 'hex');
 
 const web3 = new Web3("https://rinkeby.infura.io/v3/6d17d1d302fd468a9ccc16233e5ff1b8");
 
